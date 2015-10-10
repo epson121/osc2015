@@ -1,14 +1,4 @@
-	<head>
-		<!--Import Google Icon Font-->
-	      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-	      <!--Import materialize.css-->
-	      <link type="text/css" rel="stylesheet" href="materialize/css/styles.css"  media="screen,projection"/>
-
-	      <!--Let browser know website is optimized for mobile-->
-	      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	</head>
 <template name="header">
-<<<<<<< HEAD
 <!-- Dropdown Structure -->
 <ul id="dropdown1" class="dropdown-content">
   <li><a href="{{pathFor route='login'}}">Prijava</a></li>
@@ -32,17 +22,5 @@
 
 </script>
  </template>
-=======
-    This is a header with links
-    <span><a href="{{pathFor route='home'}}">Home</a></span>
-    {{#if currentUser}}
-        <span><a href="#" class="logout">Logout</a></span>
-    {{else}}
-        <span><a href="{{pathFor route='login'}}">Login</a></span>
-        <span><a href="{{pathFor route='register'}}">Register</a></span>
-    {{/if}}
-    {{#if isAdmin currentUser}}
-        <span><a href="{{pathFor route='admin'}}">Administration</a></span>
-    {{/if}}
-</template>
->>>>>>> bd4014a7e6df7dda95d42a8358879c0e8d57ed82
+
+
