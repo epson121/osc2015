@@ -2,10 +2,53 @@
     <ul>
     {{#each events}}
         <li>
-            {{name}}
+            <a href="{{pathFor route='event'}}">{{name}}</a>
             {{description}}
             {{createdAt}}
         </li>
     {{/each}}
     </ul>
+</template>
+
+
+<template name="event">
+    <ul>
+        <li>{{name}}</li>
+        <li>{{description}}</li>
+        <li>{{latitude}}</li>
+        <li>{{longitude}}</li>
+        <li>{{createdAt}}</li>
+        <li>{{priority}}</li>
+    </ul>
+    <ul>
+        {{> event_comments_list}}
+    </ul>
+    <ul>
+        <button id="priority_btn" class="btn waves-effect waves-light" value="Prioritize" type="submit" name="action">Povecaj prioritet
+            <i class="material-icons right">send</i>
+        </button>
+        <form class="col s12 register">
+          <div class="row">
+            <div class="input-field col s12">
+             <textarea name="comment" placeholder="comment"></textarea>
+              <label for="comment">Komentar</label>
+            </div>
+          </div>
+
+          <button class="btn waves-effect waves-light" value="Register" type="submit" name="action">Komentiraj
+            <i class="material-icons right">send</i>
+          </button>
+        </form>
+    </ul>
+</template>
+
+<template name="event_comments_list">
+{{#each eventComments}}
+    <ul>
+        <li>
+            {{comment}}
+            {{user}}
+        </li>
+    </ul>
+{{/each}}
 </template>

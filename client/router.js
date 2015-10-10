@@ -49,3 +49,13 @@ Router.route('/add_ticket', function() {
 }, {
     name: 'add_ticket'
 });
+
+Router.route('/event/:_id', function() {
+    this.render('event', {
+      data: function() {
+        return Events.findOne({_id: this.params._id});
+      }
+    })
+}, {
+    name: 'event'
+});
