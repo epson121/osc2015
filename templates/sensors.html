@@ -6,12 +6,10 @@
         {{description}}<br>
     {{/each}}
     <br><br>
-    {{#if currentUser}}
+    {{#if isAdmin}}
         <a href="{{pathFor route='new_sensor'}}" title="new_sensor">Add new sensor</a>
-    {{else}}
-        <a href="#" title="new_sensor">Add new sensor</a>
     {{/if}}
-     <div class="map-container">
+    <div class="map-container">
         {{> googleMap name="sensors_map" options=mapOptions}}
     </div>
 </ul>
@@ -52,6 +50,9 @@
     {{> highchartsHelper chartId="temperature" chartWidth="100%" charHeight="100%" chartObject=temperatureChart}}
     {{> highchartsHelper chartId="humidity" chartWidth="100%" charHeight="100%" chartObject=humidityChart}}
     {{> highchartsHelper chartId="wind" chartWidth="100%" charHeight="100%" chartObject=windChart}}
+    <div class="map-container">
+        {{> googleMap name="sensor_map" options=mapOptions}}
+    </div>
     <br>
 </template>
 

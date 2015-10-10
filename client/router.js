@@ -50,6 +50,12 @@ Router.route('/sensors', function() {
     name: 'sensors'
 });
 
+Router.route('/activities', function() {
+    this.render('activities');
+}, {
+    name: 'activities'
+});
+
 Router.route('/new_sensor', function() {
     this.render('new_sensor');
 }, {

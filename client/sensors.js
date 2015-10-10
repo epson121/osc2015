@@ -12,6 +12,17 @@ Template.sensors.helpers({
           zoom: 11
         };
       }
+    },
+
+    isAdmin: function() {
+        var user = Meteor.user();
+        if (!user)
+            return false;
+        if (!user.profile)
+            return false;
+        if (!user.profile.admin)
+            return false;
+        return true;
     }
 });
 
@@ -223,3 +234,33 @@ Template.sensor.windChart = function() {
         }]
     };
 };
+
+Template.sensor.helpers({
+    mapOptions: function() {
+        sensor = Sensors.findOne({_id: this._id});
+        if (sensor) {
+            Session.set('selected_sensor', sensor);
+        }
+        if (GoogleMaps.loaded()) {
+            return {
+              center: new google.maps.LatLng(45.5575, 18.6796),
+              zoom: 11
+            };
+        }
+    }
+});
+
+Template.sensor.onCreated(function() {
+  GoogleMaps.ready('sensor_map', function(map) {
+      if (Session.get('selected_sensor')) {
+        var evt = Session.get('selected_sensor');
+        var myLatLng = new google.maps.LatLng(evt.latitude, evt.longitude);
+        console.log(myLatLng);
+        var marker = new google.maps.Marker({
+            draggable: false,
+            position: myLatLng,
+            map: map.instance,
+        });
+      }
+    });
+});
