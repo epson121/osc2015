@@ -6,7 +6,7 @@
        <span class="badge badge-red">{{priority}}</span>
            <a href="{{pathFor route='event'}}"> {{name}}</a>
             {{description}}
-            {{createdAt}}
+            {{formatTime createdAt}}
         </li>
     {{/each}}
     </ul>
@@ -25,21 +25,23 @@
   
     <ul class="list-flat">
         <li class="tools-alert">
-        <h3>{{name}}</h3>
+        <h3>{{name}} - {{formatTime createdAt}}</h3>
         <p>{{description}}</p>
-        {{createdAt}}
+        
         <p>Broj prijava do sada: <span class="badge badge-red">{{priority}}</span> </p>
         
         </li>
     </ul>
+     {{#if currentUser}}
     <button id="priority_btn" value="Prioritize" type="submit" name="action" class="btn btn-blue width-100">Povećaj prioritet <i class="fa fa-arrow-up"></i> </button>
 <hr >
+{{/if}}
 		<ol class="list-flat">
 		  {{> event_comments_list}}
 		</ol>
     
 
-
+ {{#if currentUser}}
 <form class="forms register">
     <label>
         Vaš komentar:
@@ -49,6 +51,7 @@
 		<i class="fa fa-paper-plane-o"></i>
 	</button>
 </form>
+{{/if}}
 </div>
 		<div class="unit-50">
 			    {{latitude}}

@@ -34,11 +34,11 @@ Template.add_ticket.events({
           if (!existsNear) {
             $('#my_lat').val(position.coords.latitude);
             $('#my_lng').val(position.coords.longitude);
-            FlashMessages.sendSuccess('Current location used');
+            toastr.success('Current location used');
           }
         })
     } else {
-        FlashMessages.sendError("Geolocation is not supported by this browser.");
+        toastr.error("Geolocation is not supported by this browser.");
     }
   },
 
@@ -59,7 +59,7 @@ Template.add_ticket.events({
      var longitude = $('[name=lng]').val();
 
      if (!name || !phone || !description || !latitude || !longitude) {
-      FlashMessages.sendError('Please fill in all fields');
+      toastr.error('Please fill in all fields');
       return;
      }
 
@@ -73,12 +73,12 @@ Template.add_ticket.events({
       votes: [userId],
       latitude: latitude,
       longitude: longitude,
-      createdAt: new Date()
+       createdAt: new Date()
      }, function(error, result) {
         if (error) {
-          FlashMessages.sendError(error.reason);
+          toastr.error(error.reason);
         } else {
-          FlashMessages.sendSuccess('Event submitted successfully');
+          toastr.success('Event submitted successfully');
           Router.go('home');
         }
      });
@@ -146,3 +146,8 @@ function distance(lat1, lon1, lat2, lon2, unit) {
     if (unit=="N") { dist = dist * 0.8684 }
     return dist
 }
+
+UI.registerHelper('formatTime', function(context, options) {
+  if(context)
+    return moment(context).format('MM/DD/YYYY - HH:MM');
+});

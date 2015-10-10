@@ -9,19 +9,21 @@
             	<li><a href="{{pathFor route='home'}}"><i class="fa fa-home"></i> Naslovnica</a></li>
                 <li><a href="{{pathFor route='add_ticket'}}"><i class="fa fa-bug"></i> Prijavi Rojeve</a></li>
                 {{#if isAdmin}}
-                    <li><a href="{{pathFor route='sensors'}}">Senzori</a></li>
+                    <li><a href="{{pathFor route='sensors'}}"><i class="fa fa-area-chart"></i>
+ 				Senzori</a></li>
                 {{/if}}
             </ul>
         </nav>
         <nav class="navbar navbar-right">
             <ul>
                 {{#if currentUser}}
-				  <li><a href="#" class="logout">Odjava</a></li>
+				  <li><a href="#" class="logout"><i class="fa fa-sign-out"></i>
+					Odjava</a></li>
 				  {{else}}
 				  <li><a href="{{pathFor route='login'}}">Prijava <i class="fa fa-sign-in"></i>
-</a></li>
+					</a></li>
 				  <li><a href="{{pathFor route='register'}}">Registracija <i class="fa fa-user-plus"></i>
-</a></li>
+					</a></li>
 				  {{/if}}
             </ul>
         </nav>

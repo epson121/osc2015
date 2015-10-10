@@ -26,3 +26,5 @@ dburles:google-maps
 mrt:cron
 maazalik:highcharts
 fortawesome:fontawesome
+momentjs:moment
+chrismbeckett:toastr
