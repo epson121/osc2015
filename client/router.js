@@ -44,6 +44,18 @@ Router.route('/admin', function() {
     name: 'admin'
 });
 
+Router.route('/sensors', function() {
+    this.render('sensors');
+}, {
+    name: 'sensors'
+});
+
+Router.route('/new_sensor', function() {
+    this.render('new_sensor');
+}, {
+    name: 'new_sensor'
+});
+
 Router.route('/add_ticket', function() {
     this.render('add_ticket');
 }, {
@@ -58,4 +70,14 @@ Router.route('/event/:_id', function() {
     })
 }, {
     name: 'event'
+});
+
+Router.route('/sensor/:_id', function() {
+    this.render('sensor', {
+      data: function() {
+        return Sensors.findOne({_id: this.params._id});
+      }
+    })
+}, {
+    name: 'sensor'
 });

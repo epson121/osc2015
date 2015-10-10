@@ -1,0 +1,50 @@
+<template name="sensors">
+<ul>
+    <li>Popis senzora</li>
+    {{#each sensors}}
+        <a href="{{pathFor route='sensor'}}" title="">{{name}}</a><br>
+        {{description}}<br>
+    {{/each}}
+    <br><br>
+    <a href="{{pathFor route='new_sensor'}}" title="new_sensor">Add new sensor</a>
+</ul>
+</template>
+
+<template name="new_sensor">
+     <form method="post" action="" class="forms new_sensor">
+
+            <h1>Dodaj senzor</h1>
+            <label for="name">Naziv senzora</label>
+            <input type="text" name="name"  class="width-100"/>
+            <label for="description">Opis</label>
+            <textarea name="description" placeholder="description"></textarea>
+           <h3> Lokacija: </h3>
+           <label>
+                Odaberi na mapi
+           </label>
+            <div class="map-container width-100">
+                {{> googleMap name="map" options=mapOptions}}
+                <button id="remove_marker">Remove marker</button>
+            </div>
+            <style type="text/css" media="screen">
+                .map-container {
+                    height: 250px;
+                    }
+            </style>
+            <p><input id="my_lat" type="hidden" name="lat" value=""></p>
+            <p><input id="my_lng" type="hidden" name="lng" value=""></p>
+
+           <!--  <p><input type="submit" value="Submit ticket"></p> -->
+            <button class="btn btn-red" type="submit" value="Submit ticket">Spremi senzor</button>
+    </form>
+</template>
+
+<template name="sensor">
+    <a href="{{pathFor route='sensor'}}" title="">{{name}}</a><br>
+    {{description}}<br>
+    {{> highchartsHelper chartId="temperature" chartWidth="100%" charHeight="100%" chartObject=temperatureChart}}
+    {{> highchartsHelper chartId="humidity" chartWidth="100%" charHeight="100%" chartObject=humidityChart}}
+    {{> highchartsHelper chartId="wind" chartWidth="100%" charHeight="100%" chartObject=windChart}}
+    <br>
+</template>
+
