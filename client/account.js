@@ -6,9 +6,8 @@ Template.register.events({
       var options = {
           email: em,
           password: pass,
-          // profile: {
-          //     admin: false
-          // },
+          profile: {
+          },
       };
       Accounts.createUser(options, function(error) {
         if (error) {
@@ -32,8 +31,14 @@ Template.login.events({
           FlashMessages.sendError(error.reason);
         } else {
           FlashMessages.sendSuccess("You've successfully logged in.");
-          if (Meteor.user().profile.admin) {
-            Router.go('admin');
+          console.log(Meteor.user().profile.admin);
+          var profile = Meteor.user().profile;
+          if (profile) {
+            if (profile.admin) {
+              Router.go('admin');
+            } else {
+              Router.go('home');
+            }
           } else {
             Router.go('home');
           }
