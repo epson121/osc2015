@@ -14,56 +14,76 @@
 
 
 <template name="event">
-<div class="units-row">
-	<div class="unit-100">
-		 <h1 class="text-centered">Povećaj prioritet</h1>
-	</div>
-</div>
+    <div class="units-row">
+    	<div class="unit-100">
+    		 <h1 class="text-centered">Povećaj prioritet</h1>
+    	</div>
+    </div>
     <div class="units-row">
         <div class="unit-50">
-        
-  
-    <ul class="list-flat">
-        <li class="tools-alert">
-        <h3>{{name}}</h3>
-        <p>{{description}}</p>
-        {{createdAt}}
-        <p>Broj prijava do sada: <span class="badge badge-red">{{priority}}</span> </p>
-        
-        </li>
-    </ul>
-    <button id="priority_btn" value="Prioritize" type="submit" name="action" class="btn btn-blue width-100">Povećaj prioritet <i class="fa fa-arrow-up"></i> </button>
-<hr >
-		<ol class="list-flat">
-		  {{> event_comments_list}}
-		</ol>
-    
 
 
-<form class="forms register">
-    <label>
-        Vaš komentar:
-          <textarea name="comment" class="width-100" placeholder="comment"></textarea>
-    </label>
-	<button class="btn btn-green width-100" value="Register" type="submit" name="action">Komentiraj
-		<i class="fa fa-paper-plane-o"></i>
-	</button>
-</form>
-</div>
+            <ul class="list-flat">
+                <li class="tools-alert">
+                <h3>{{name}}</h3>
+                <p>{{description}}</p>
+                {{createdAt}}
+                <p>Broj prijava do sada: <span class="badge badge-red">{{priority}}</span> </p>
+
+                </li>
+            </ul>
+            <button id="priority_btn" value="Prioritize" type="submit" name="action" class="btn btn-blue width-100">Povećaj prioritet <i class="fa fa-arrow-up"></i> </button>
+             <hr >
+        		<ol class="list-flat">
+        		  {{> event_comments_list}}
+        		</ol>
+
+
+
+        <form class="forms register">
+            <label>
+                Vaš komentar:
+                  <textarea name="comment" class="width-100" placeholder="comment"></textarea>
+            </label>
+        	<button class="btn btn-green width-100" value="Register" type="submit" name="action">Komentiraj
+        		<i class="fa fa-paper-plane-o"></i>
+        	</button>
+        </form>
+        </div>
 		<div class="unit-50">
-			    {{latitude}}
-		        {{longitude}}
+            <div class="map-container">
+                {{> googleMap name="event_map" options=mapOptions}}
+            </div>
+            <div class="sensor-data">
+                {{> sensorData}}
+            </div>
 		</div>
     </div>
 </template>
 
 <template name="event_comments_list">
 {{#each eventComments}}
-   
+
         <li class="tools-alert tools-alert-yellow">
             {{comment}}
             {{user}}
         </li>
- 
+
 {{/each}}
+</template>
+
+<template name="sensorData">
+<ul>
+    <li>Average data (last 10 readings)</li>
+    <li>
+        Temperature {{temperature}} C
+    </li>
+    <li>
+        Humidity {{humidity}} %
+    </li>
+    <li>
+        Wind {{wind}} km/h
+    </li>
+    <li><a href="{{pathFor 'sensor' _id=nearest_sensor }}" title="">Nearest sensor</a></li>
+</ul>
 </template>

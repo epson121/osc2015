@@ -19,7 +19,7 @@ Meteor.startup(function() {
 
 
 var mock = function () {
-  var sensors = Sensors.find({}).fetch();
+  var sensors = Sensors.find({}, {sort: {date_created: 1}}).fetch();
   console.log(sensors);
   for (var i = 0; i < sensors.length; i++) {
     if (i == 0) {

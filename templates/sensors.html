@@ -6,7 +6,14 @@
         {{description}}<br>
     {{/each}}
     <br><br>
-    <a href="{{pathFor route='new_sensor'}}" title="new_sensor">Add new sensor</a>
+    {{#if currentUser}}
+        <a href="{{pathFor route='new_sensor'}}" title="new_sensor">Add new sensor</a>
+    {{else}}
+        <a href="#" title="new_sensor">Add new sensor</a>
+    {{/if}}
+     <div class="map-container">
+        {{> googleMap name="sensors_map" options=mapOptions}}
+    </div>
 </ul>
 </template>
 
