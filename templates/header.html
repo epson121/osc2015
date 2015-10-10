@@ -7,11 +7,9 @@
         <nav class="navbar navbar-left">
             <ul>
             	<li><a href="{{pathFor route='home'}}"><i class="fa fa-home"></i> Naslovnica</a></li>
+                <li><a href="{{pathFor route='sensors'}}"><i class="fa fa-area-chart"></i>Senzori</a></li>
+                <li><a href="{{pathFor route='activities'}}"><i class="fa fa-area-chart"></i>Aktivnosti</a></li>
                 <li><a href="{{pathFor route='add_ticket'}}"><i class="fa fa-bug"></i> Prijavi Rojeve</a></li>
-                {{#if isAdmin}}
-                    <li><a href="{{pathFor route='sensors'}}"><i class="fa fa-area-chart"></i>
- 				Senzori</a></li>
-                {{/if}}
             </ul>
         </nav>
         <nav class="navbar navbar-right">

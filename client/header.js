@@ -1,10 +1,12 @@
 Template.header.helpers({
-    isAdmin: function () {
+    isAdmin: function() {
         var user = Meteor.user();
-        if (user.profile) {
-            if (user.profile.admin)
-                return true;
-        }
-        return false;
+        if (!user)
+            return false;
+        if (!user.profile)
+            return false;
+        if (!user.profile.admin)
+            return false;
+        return true;
     }
 });

@@ -1,0 +1,7 @@
+<template name="activities">
+{{#each activities}}
+{{/each}}
+{{#if isAdmin}}
+    <a href="{{pathFor route='new_sensor'}}" title="new_sensor">Add new sensor</a>
+{{/if}}
+</template>
