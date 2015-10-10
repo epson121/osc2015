@@ -15,7 +15,7 @@ Template.event.events({
         var comment = $('[name=comment]').val();
 
         if (!userId || !eventId || !comment) {
-            FlashMessages.sendError('Please fill all data.');
+            toastr.error('Please fill all data.');
             return;
         }
 
@@ -25,9 +25,9 @@ Template.event.events({
             comment: comment
         }, function(error, success) {
             if (error) {
-                FlashMessages.sendError(error.reason);
+                toastr.error(error.reason);
             } else {
-                FlashMessages.sendSuccess('Comment successfully added.');
+                toastr.success('Komentar uspješno dodan.');
             }
         })
 
@@ -41,7 +41,7 @@ Template.event.events({
         var eventId = this._id;
 
         if (!userId) {
-            FlashMessages.sendError('error');
+            toastr.error('error');
         }
 
         var evt = Events.findOne({_id: eventId});

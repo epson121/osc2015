@@ -11,9 +11,9 @@ Template.register.events({
       };
       Accounts.createUser(options, function(error) {
         if (error) {
-          FlashMessages.sendError("There was an error in registering.");
+          toastr.error("There was an error in registering.");
         } else {
-          FlashMessages.sendSuccess("You've successfully registered.");
+          toastr.success("You've successfully registered.");
           Router.go('home');
         };
       });
@@ -28,9 +28,9 @@ Template.login.events({
       Meteor.loginWithPassword(email, password, function(error) {
         if (error) {
           console.log(error.reason);
-          FlashMessages.sendError(error.reason);
+          toastr.error(error.reason);
         } else {
-          FlashMessages.sendSuccess("You've successfully logged in.");
+          toastr.success("You've successfully logged in.");
           console.log(Meteor.user().profile.admin);
           var profile = Meteor.user().profile;
           if (profile) {
@@ -51,7 +51,7 @@ Template.header.events({
     'click .logout': function(event) {
       event.preventDefault();
       Meteor.logout();
-      FlashMessages.sendSuccess("You've successfully logged out.");
+      toastr.success("You've successfully logged out.");
       Router.go('home');
     }
   });
