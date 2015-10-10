@@ -1,32 +1,33 @@
-<template name="add_ticket">
-
+<template name="add_ticket">    
     <div class="units-row">
-
-        <div class="unit-50">
+        <div class="unit-centered unit-50">
         <h1>Prijavi rojeve</h1>
-            <form class="login forms">
-        <label>Vaše ime: 
+        <form class="login forms">
+        <label>
+            Vaše ime: 
             <input type="text" name="name"  class="width-100"/>
         </label>
-        <label>Kontakt telefon: 
+        <label>
+            Kontakt telefon: 
             <input type="phone" name="phone"  class="width-100"/>
         </label>
         <label>
-        Opis: 
-            <textarea name="description" placeholder="description"  class="width-100"></textarea>
+            Vaš komentar: 
+            <textarea name="description" class="width-100"></textarea>
         </label>
       
        <h3> Lokacija: </h3>
       
         <label>
-        <button id ="my_loc" name="my_loc">Moja lokacija</button> 
+        <button id ="my_loc" name="my_loc" class="btn btn-blue width-100"><i class="fa fa-globe"></i>
+ Pokušaj pronaći moju lokaciju</button> 
     </label>
        <label>
             ili odaberi na mapi
        </label>
         <div class="map-container width-100">
             {{> googleMap name="map" options=mapOptions}}
-            <button id="remove_marker">Remove marker</button>
+           
         </div>
         <style type="text/css" media="screen">
             .map-container {
@@ -36,9 +37,9 @@
         <p><input id="my_lat" type="hidden" name="lat" value=""></p>
         <p><input id="my_lng" type="hidden" name="lng" value=""></p>
         
-
+         <button id="remove_marker" class="btn btn-yellow" >Ukloni marker</button>
        <!--  <p><input type="submit" value="Submit ticket"></p> -->
-        <button class="btn btn-red" type="submit" value="Submit ticket">Prijavi roj!</button>
+        <button class="btn btn-red right" type="submit" value="Submit ticket">Prijavi roj!</button>
     </form>
         </div>
         

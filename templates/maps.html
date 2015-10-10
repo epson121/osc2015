@@ -7,13 +7,25 @@
     <div class="map-container">
         {{> googleMap name="map" options=mapOptions}}
     </div>
-    <style type="text/css" media="screen">
-        .map-container {
-          height: 450px;
-        }
-        </style>
-        </div>
-        <script type="text/javascript">
-          $('#tabs').tabs('show', '#tab1'); // set tab with id="tab1" is active
-        </script>
+
+</div>
+<div id="tab2">
+
+    <div class="map-container">
+        <h2>Druga mapa</h2>
+    </div>
+</div>
+
+<div id="tab3">
+    <div class="map-container">
+        <h2>Treća mapa</h2>
+    </div>
+</div>
+
+
+<script type="text/javascript">
+ //           $('#tabs').tabs('show', '#tab1'); // set tab with id="tab1" is active
+        var activeTab = $('#tabs').tabs('getActiveTab');
+       </script>
+
 </template>
