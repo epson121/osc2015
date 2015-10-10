@@ -1,9 +1,9 @@
 <template name="add_ticket">
     <form class="login">
-        <p>Name: <input type="name" name="name"></p>
-        <p>Phone: <input type="phone" name="phone"></p>
+        <p>Name: <input type="name" name="name" /></p>
+        <p>Phone: <input type="phone" name="phone" /></p>
         <p>Description: <textarea name="description" placeholder="description"></textarea></p>
-        <p>Location: <input type="checkbox" name="location" value="">Use my current location</p>
+        Location: <button id ="my_loc" name="my_loc"></button> Use my location
         or select from map
         <div class="map-container">
             {{> googleMap name="map" options=mapOptions}}
@@ -15,8 +15,8 @@
   height: 100px;
 }
         </style>
-        <p><input id="my_lat" type="hidden" name="lat" value="latitude"></p>
-        <p><input id="my_lng" type="hidden" name="lng" value="longitude"></p>
+        <p><input id="my_lat" type="hidden" name="lat" value=""></p>
+        <p><input id="my_lng" type="hidden" name="lng" value=""></p>
         <p><input type="submit" value="Submit ticket"></p>
     </form>
 </template>
