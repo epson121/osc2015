@@ -7,8 +7,16 @@
     <div class="map-container">
         {{> googleMap name="map" options=mapOptions}}
     </div>
-
+    <style type="text/css" media="screen">
+        .map-container {
+          height: 450px;
+        }
+        </style>
 </div>
+<script type="text/javascript">
+  $('#tabs').tabs('show', '#tab1'); // set tab with id="tab1" is active
+</script>
+
 <div id="tab2">
 
     <div class="map-container">
