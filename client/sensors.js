@@ -1,14 +1,40 @@
 Template.sensors.helpers({
     sensors: function() {
-        return Sensors.find({});
+        var sensors = Sensors.find({});
+        Session.set('sensors', sensors.fetch());
+        return sensors;
+    },
+
+    mapOptions: function() {
+      if (GoogleMaps.loaded()) {
+        return {
+          center: new google.maps.LatLng(45.5575, 18.6796),
+          zoom: 11
+        };
+      }
     }
 });
 
-Template.sensors.events({
-    'click #new_sensor': function() {
+Template.sensors.onCreated(function() {
+  GoogleMaps.ready('sensors_map', function(map) {
+    console.log("here123");
+      if (Session.get('sensors')) {
+        var sensors = Session.get('sensors');
+        for (var i = 0; i < sensors.length; i++) {
+          var myLatLng = new google.maps.LatLng(sensors[i].latitude, sensors[i].longitude);
+          console.log(myLatLng);
+          var marker = new google.maps.Marker({
+            draggable: false,
+            position: myLatLng,
+            map: map.instance,
+          });
+        }
+      } else {
+        console.log("no session sensors");
+      }
+    });
+});
 
-    }
-})
 
 var sensorMarkers = sensorMarkers || [];
 Template.new_sensor.helpers({

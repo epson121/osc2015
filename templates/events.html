@@ -14,22 +14,21 @@
 
 
 <template name="event">
-<div class="units-row">
-	<div class="unit-100">
-		 <h1 class="text-centered">Povećaj prioritet</h1>
-	</div>
-</div>
+    <div class="units-row">
+    	<div class="unit-100">
+    		 <h1 class="text-centered">Povećaj prioritet</h1>
+    	</div>
+    </div>
     <div class="units-row">
         <div class="unit-50">
-        
-  
+
     <ul class="list-flat">
         <li class="tools-alert">
         <h3>{{name}} - {{formatTime createdAt}}</h3>
         <p>{{description}}</p>
-        
+
         <p>Broj prijava do sada: <span class="badge badge-red">{{priority}}</span> </p>
-        
+
         </li>
     </ul>
      {{#if currentUser}}
@@ -39,7 +38,7 @@
 		<ol class="list-flat">
 		  {{> event_comments_list}}
 		</ol>
-    
+
 
  {{#if currentUser}}
 <form class="forms register">
@@ -54,19 +53,39 @@
 {{/if}}
 </div>
 		<div class="unit-50">
-			    {{latitude}}
-		        {{longitude}}
+            <div class="map-container">
+                {{> googleMap name="event_map" options=mapOptions}}
+            </div>
+            <div class="sensor-data">
+                {{> sensorData}}
+            </div>
 		</div>
     </div>
 </template>
 
 <template name="event_comments_list">
 {{#each eventComments}}
-   
+
         <li class="tools-alert tools-alert-yellow">
             {{comment}}
             {{user}}
         </li>
- 
+
 {{/each}}
+</template>
+
+<template name="sensorData">
+<ul>
+    <li>Average data (last 10 readings)</li>
+    <li>
+        Temperature {{temperature}} C
+    </li>
+    <li>
+        Humidity {{humidity}} %
+    </li>
+    <li>
+        Wind {{wind}} km/h
+    </li>
+    <li><a href="{{pathFor 'sensor' _id=nearest_sensor }}" title="">Nearest sensor</a></li>
+</ul>
 </template>
