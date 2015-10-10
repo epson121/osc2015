@@ -1396,9 +1396,9 @@ input.input-smaller {
   display: block;
   text-decoration: none;
 }
-.navbar a:hover {
-  color: #de2c3b;
-  text-decoration: underline;
+.navbar a:hover, .navbar a:focus  {
+  color: #ccc;
+  /*text-decoration: underline;*/
 }
 .navbar li.active a,
 .navbar span {
@@ -3656,11 +3656,21 @@ header{
 header a{
   color: #fff;
 }
+header a:hover{
+  color:rgba(0, 0, 0, 0.3);
+  text-decoration: none;
+}
 .main, footer{
   margin: auto;
   max-width: 1200px;
   padding: 0px 20px;
+
 }
+
 button.close{
   float: right;
+}
+
+.map-container {
+  height: 450px;
 }

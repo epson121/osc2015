@@ -10,19 +10,18 @@
 </template>
 <template name="home">
     <div class="units-row">
-        <div class="unit-30">{{> evts}}</div>
+        <div class="unit-30">
+        	{{> evts}}
+        </div>
         <div class="unit-70">
-            <nav class="nav-tabs" data-tools="tabs" data-equals="true">
-        <ul>
-            <li><a href="#tab1">Trenutno stanje</a></li>
-            <li><a href="#tab2">Prijavljeni rojevi</a></li>
-            <li><a href="#tab3">Stanje na terenu</a></li>
-        </ul>
-    </nav>
-        	{{> maps}}
+			<nav class="nav-tabs" data-tools="tabs" data-active="#tab1" data-equals="true">
+				<ul>
+					<li><a href="#tab1">Vaše prijave</a></li>
+					<li><a href="#tab2">Naše intervencije</a></li>
+					<li><a href="#tab3">Trenutna situacija na terenu</a></li>
+				</ul>
+			</nav>
+    	{{> maps}}        	       
         </div>
     </div>
-
-	   
-	    
 </template>

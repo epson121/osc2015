@@ -1,8 +1,9 @@
 <template name="evts">
+<h2>Vaše prijave</h2>
     <ul class="list-flat">
     {{#each events}}
-        <li>
-       <span class="badge badge-green">{{priority}}</span>
+        <li class="tools-alert-blue tools-alert">
+       <span class="badge badge-red">{{priority}}</span>
            <a href="{{pathFor route='event'}}"> {{name}}</a>
             {{description}}
             {{createdAt}}
@@ -13,43 +14,56 @@
 
 
 <template name="event">
-    <ul>
-        <li>{{name}}</li>
-        <li>{{description}}</li>
-        <li>{{latitude}}</li>
-        <li>{{longitude}}</li>
-        <li>{{createdAt}}</li>
-        <li>{{priority}}</li>
+<div class="units-row">
+	<div class="unit-100">
+		 <h1 class="text-centered">Povećaj prioritet</h1>
+	</div>
+</div>
+    <div class="units-row">
+        <div class="unit-50">
+        
+  
+    <ul class="list-flat">
+        <li class="tools-alert">
+        <h3>{{name}}</h3>
+        <p>{{description}}</p>
+        {{createdAt}}
+        <p>Broj prijava do sada: <span class="badge badge-red">{{priority}}</span> </p>
+        
+        </li>
     </ul>
-    <ul>
-        {{> event_comments_list}}
-    </ul>
-    <ul>
-        <button id="priority_btn" class="btn waves-effect waves-light" value="Prioritize" type="submit" name="action">Povecaj prioritet
-            <i class="material-icons right">send</i>
-        </button>
-        <form class="col s12 register">
-          <div class="row">
-            <div class="input-field col s12">
-             <textarea name="comment" placeholder="comment"></textarea>
-              <label for="comment">Komentar</label>
-            </div>
-          </div>
+    <button id="priority_btn" value="Prioritize" type="submit" name="action" class="btn btn-blue width-100">Povećaj prioritet <i class="fa fa-arrow-up"></i> </button>
+<hr >
+		<ol class="list-flat">
+		  {{> event_comments_list}}
+		</ol>
+    
 
-          <button class="btn waves-effect waves-light" value="Register" type="submit" name="action">Komentiraj
-            <i class="material-icons right">send</i>
-          </button>
-        </form>
-    </ul>
+
+<form class="forms register">
+    <label>
+        Vaš komentar:
+          <textarea name="comment" class="width-100" placeholder="comment"></textarea>
+    </label>
+	<button class="btn btn-green width-100" value="Register" type="submit" name="action">Komentiraj
+		<i class="fa fa-paper-plane-o"></i>
+	</button>
+</form>
+</div>
+		<div class="unit-50">
+			    {{latitude}}
+		        {{longitude}}
+		</div>
+    </div>
 </template>
 
 <template name="event_comments_list">
 {{#each eventComments}}
-    <ul>
-        <li>
+   
+        <li class="tools-alert tools-alert-yellow">
             {{comment}}
             {{user}}
         </li>
-    </ul>
+ 
 {{/each}}
 </template>
