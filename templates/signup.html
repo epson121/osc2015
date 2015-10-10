@@ -1,23 +1,17 @@
 <template name="register">
- <div class="row">
- <h2>Registracija</h2>
-    <form class="col s12 register">
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="email" type="email" name="email" class="validate">
-          <label for="email">e-mail</label>
-        </div>
-      </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <input id="password" type="password" name="password" class="validate">
-          <label for="password">Zaporka</label>
-        </div>
-      </div>
 
-  <button class="btn waves-effect waves-light" value="Register" type="submit" name="action">Registracija
-    <i class="material-icons right">send</i>
-  </button>
+ <h2>Registracija</h2>
+    <form method="post" action="" class="forms register">
+        <label>
+            Email
+            <input id="email" type="email" name="email" class="width-50" />
+        </label>
+        <label>
+            Zaporka
+            <input id="password" type="password" name="password" class="width-50" />
+        </label>
+        <p>
+            <button class="btn-blue btn width-50" type="submit" name="action">Registracija</button>
+        </p>
     </form>
-  </div>
 </template>

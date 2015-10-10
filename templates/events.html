@@ -1,8 +1,9 @@
 <template name="evts">
-    <ul>
+    <ul class="list-flat">
     {{#each events}}
         <li>
-            <a href="{{pathFor route='event'}}">{{name}}</a>
+       <span class="badge badge-green">{{priority}}</span>
+           <a href="{{pathFor route='event'}}"> {{name}}</a>
             {{description}}
             {{createdAt}}
         </li>

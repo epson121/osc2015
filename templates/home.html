@@ -1,14 +1,28 @@
 <template name="main">
-    <div>{{> header}}</div>
-    <div>
-        {{> flashMessages}}
-    </div>
-    <div>{{> yield}}</div>
-    <div>{{> footer}}</div>
-</template>
+    	{{> header}}
 
+        {{> message}}
+
+    	<div class="main">
+    		{{> yield}}
+    	</div>
+    	{{> footer}}		
+</template>
 <template name="home">
-    This is a homepage
-    {{> evts}}
-    {{> maps}}
+    <div class="units-row">
+        <div class="unit-30">{{> evts}}</div>
+        <div class="unit-70">
+            <nav class="nav-tabs" data-tools="tabs" data-equals="true">
+        <ul>
+            <li><a href="#tab1">Trenutno stanje</a></li>
+            <li><a href="#tab2">Prijavljeni rojevi</a></li>
+            <li><a href="#tab3">Stanje na terenu</a></li>
+        </ul>
+    </nav>
+        	{{> maps}}
+        </div>
+    </div>
+
+	   
+	    
 </template>
