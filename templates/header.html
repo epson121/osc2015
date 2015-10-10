@@ -1,40 +1,24 @@
-	<head>
-		<!--Import Google Icon Font-->
-	      <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
-	      <!--Let browser know website is optimized for mobile-->
-	      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-	</head>
+<head>
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+</head>
 
 <template name="header">
-
-<header>
-
-<!-- Dropdown Structure -->
-<ul id="dropdown1" class="dropdown-content">
-{{#if currentUser}}
-  <li><a href="#" class="logout">Odjava</a></li>
-  {{else}}
-  <li><a href="{{pathFor route='login'}}">Prijava</a></li>
-  <li><a href="{{pathFor route='register'}}">Registracija</a></li>
-   {{/if}}
-</ul>
-<nav>
-  <div class="nav-wrapper">
-  <a href="{{pathFor route='home'}}" class="brand-logo">Mosquitto</a>
-    <ul class="right hide-on-med-and-down">
-      <li><a href="{{pathFor route='add_ticket'}}">Prijavi Rojeve</a></li>
-      <!-- Dropdown Trigger -->
-      <li><a class="dropdown-button" href="#!" data-activates="dropdown1">Prijava<i class="material-icons right">arrow_drop_down</i></a></li>
-    </ul>
-  </div>
-</nav>
-<script type="text/javascript">
-	$(".dropdown-button").dropdown();
-
-</script>
-
-
-
-</header>
+    <header class="group">
+        <nav class="navbar navbar-left">
+            <ul>
+            	<li><a href="{{pathFor route='home'}}">Naslovnica</a></li>
+                <li><a href="{{pathFor route='add_ticket'}}">Prijavi Rojeve</a></li>
+            </ul>
+        </nav>
+        <nav class="navbar navbar-right">
+            <ul>
+                {{#if currentUser}}
+				  <li><a href="#" class="logout">Odjava</a></li>
+				  {{else}}
+				  <li><a href="{{pathFor route='login'}}">Prijava</a></li>
+				  <li><a href="{{pathFor route='register'}}">Registracija</a></li>
+				  {{/if}}
+            </ul>
+        </nav>
+    </header>
 </template>

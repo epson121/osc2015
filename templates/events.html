@@ -1,10 +1,12 @@
 <template name="evts">
-    <ul>
+    <ul class="list-flat">
     {{#each events}}
         <li>
+       <span class="badge badge-green">14</span>
             {{name}}
             {{description}}
             {{createdAt}}
+			
         </li>
     {{/each}}
     </ul>
