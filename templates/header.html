@@ -1,6 +1,13 @@
 <template name="header">
     This is a header with links
     <span><a href="{{pathFor route='home'}}">Home</a></span>
-    <span><a href="{{pathFor route='login'}}">Login</a></span>
-    <span><a href="{{pathFor route='register'}}">Register</a></span>
+    {{#if currentUser}}
+        <span><a href="#" class="logout">Logout</a></span>
+    {{else}}
+        <span><a href="{{pathFor route='login'}}">Login</a></span>
+        <span><a href="{{pathFor route='register'}}">Register</a></span>
+    {{/if}}
+    {{#if isAdmin currentUser}}
+        <span><a href="{{pathFor route='admin'}}">Administration</a></span>
+    {{/if}}
 </template>

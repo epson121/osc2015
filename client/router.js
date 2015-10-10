@@ -36,3 +36,9 @@ Router.route('/login', function() {
 }, {
     name: 'login'
 });
+
+Router.route('/admin', function() {
+    this.render('admin');
+}, {
+    name: 'admin'
+});
