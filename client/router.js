@@ -12,7 +12,8 @@ Router.route('/', {
   //   return Meteor.subscribe('books');
   // },
   // data: function() {
-  //   data = {book: Books.find({available: true})};
+  //   data = {events: Events.find({})};
+  //   Session.set('events', data);
   //   return data;
   // },
 
