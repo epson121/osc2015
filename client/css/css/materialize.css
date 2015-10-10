@@ -3,6 +3,8 @@
  * Copyright 2014-2015 Materialize
  * MIT License (https://raw.githubusercontent.com/Dogfalo/materialize/master/LICENSE)
  */
+
+
 .materialize-red.lighten-5 {
   background-color: #fdeaeb !important; }
 
@@ -8196,3 +8198,28 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 @media (min-height: 40.125em) {
   .picker--time .picker__box {
     margin-bottom: 5em; } }
+
+       body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+  }
+
+  main {
+    flex: 1 0 auto;
+  }
+
+  .alert-info, .alert-success {
+    color: #31708F;
+    background-color: #bbdefb;
+    border-color: #BCE8F1;
+    margin: 20px 0px;
+    padding: 20px;
+}
+button.close{
+  padding: 0px;
+cursor: pointer;
+background: transparent none repeat scroll 0% 0%;
+border: 0px none;
+float: right;
+}
