@@ -42,3 +42,9 @@ Router.route('/admin', function() {
 }, {
     name: 'admin'
 });
+
+Router.route('/add_ticket', function() {
+    this.render('add_ticket');
+}, {
+    name: 'add_ticket'
+});
