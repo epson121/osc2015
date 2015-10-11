@@ -19,6 +19,7 @@ Template.add_ticket.events({
     event.preventDefault();
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
+          var existsNear = true;
           var events = Events.find({}, {latitude: 1, longitude: 1}).fetch();
           for(var i = 0; i < events.length; i++) {
             var lat1 = events[i].latitude;
@@ -30,6 +31,7 @@ Template.add_ticket.events({
                 Router.go('event', {_id: events[i]._id})
               }
               var existsNear = true;
+              break;
             } else {
               existsNear = false;
             }
@@ -57,6 +59,7 @@ Template.add_ticket.events({
       event.preventDefault();
      var name = $('[name=name]').val();
      var phone = $('[name=phone]').val();
+     var title = $('[name=title]').val();
      var description = $('[name=description]').val();
      var latitude = $('[name=lat]').val();
      var longitude = $('[name=lng]').val();
@@ -70,6 +73,7 @@ Template.add_ticket.events({
 
      Events.insert({
       name: name,
+      title: title,
       phone: phone,
       description: description,
       priority: 1,

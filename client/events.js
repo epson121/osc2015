@@ -123,6 +123,16 @@ Template.sensorData.helpers({
         }
     },
 
+    avg: function() {
+        var sensor = Session.get('ns');
+        if (sensor) {
+            var wind = scale(sensor.wind[0], 0, 100);
+            var temp = scale(sensor.temperature[0], 0, 100);
+            var humidity = scale(sensor.humidity[0], 0, 100);
+            return (wind+temp+humidity)/3;
+        }
+    },
+
     nearest_sensor: function() {
         var evtLat = this.latitude;
         var evtLng = this.longitude;
@@ -157,4 +167,11 @@ function distance(lat1, lon1, lat2, lon2, unit) {
     if (unit=="K") { dist = dist * 1.609344 }
     if (unit=="N") { dist = dist * 0.8684 }
     return dist
+}
+
+function scale(OldValue, OldMax, OldMin) {
+    var OldRange = (OldMax - OldMin);
+    var NewRange = (100 - 0);
+    var NewValue = (((OldValue - OldMin) * NewRange) / OldRange) + 0;
+    return NewValue;
 }

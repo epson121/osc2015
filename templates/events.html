@@ -6,7 +6,7 @@
             <li>
             <a href="{{pathFor route='event'}}">
             <b class="badge badge-red badge-small right">{{priority}}</b>
-              {{name}} I {{formatTime createdAt}}
+              {{title}} I {{formatTime createdAt}}
               </a>
             </li>
         {{/each}}
@@ -17,16 +17,12 @@
 
 <template name="event">
     <div class="units-row">
-    	<div class="unit-100">
-    		 <h1 class="text-centered">Povećaj prioritet</h1>
-    	</div>
-    </div>
-    <div class="units-row">
         <div class="unit-50">
 
     <ul class="list-flat">
         <li class="tools-alert">
-        <h3>{{name}} - {{formatTime createdAt}}</h3>
+        <h3>{{title}} - {{formatTime createdAt}}</h3>
+        <p>{{name}}</p>
         <p>{{description}}</p>
 
         <p>Broj prijava do sada: <span class="badge badge-red">{{priority}}</span> </p>
@@ -93,6 +89,9 @@
 <tr>
     <th>Brzina vjetra</th>
     <td>{{wind}} km/h</td>
+</tr>
+<tr>
+    <td>{{avg}}</td>
 </tr>
 </table>
 <a class="btn btn-green btn-outline width-100" href="{{pathFor 'sensor' _id=nearest_sensor }}" title="">Pogledajte najbližu točku <i class="fa fa-line-chart"></i>
