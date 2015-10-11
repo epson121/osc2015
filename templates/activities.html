@@ -1,71 +1,99 @@
 <template name="activities">
+<table class="table-bordered">
+<tr>
+    <th>Naziv kampanje</th>
+    <th>Opis</th>
+    <th>Vrijeme</th>
+    <th>Detalji</th>
+</tr>
 {{#each activities}}
-<ul>
-    <li><a href="{{pathFor route='activity'}}" title="">{{name}}</a></li>
-    <li>{{description}}</li>
-    <li>{{formatTime scheduledAt}}</li>
-</ul>
+<tr>
+    <td class="width-25"><a href="{{pathFor route='activity'}}" title="">{{name}}</a></td>
+    <td class="width-25">{{description}}</td>
+    <td class="width-25">{{formatTime scheduledAt}}</td>
+    <td class="width-25"><a class="btn btn-green" href="{{pathFor route='activity'}}" title=""><i class="fa fa-search-plus"></i> Detalji</a></td>
+</tr>
+
 {{else}}
-    Nema brate..
+<tr>
+  <td colspan="4">  <h3>Nema brate...</h3></td>
+    </tr>
 {{/each}}
-<br><br>
+</table>
 {{#if isAdmin}}
-    <a href="{{pathFor route='new_activity'}}" title="new_activity">Add new activity</a>
+    <a  class="btn btn-blue right" href="{{pathFor route='new_activity'}}" title="new_activity"><i class="fa fa-calendar-plus-o"></i>
+ Dodaj novo tretiranje</a>
 {{/if}}
 </template>
 
 
 <template name="new_activity">
+<div class="units-row">
+<div class="unit-centered unit-50">
     <form method="post" action="" class="forms new_sensor">
 
             <h1>Dodaj novu aktivnost zaprašivanja</h1>
-            <label for="name">Naziv</label>
+            <label for="name">Naziv
             <input type="text" name="name"  class="width-100"/>
-            <label for="description">Opis</label>
-            <textarea name="description"></textarea>
-            <select id="selection_type" name="selection_type">
-                <option value="0">Poligon</option>
-                <option value="1">Linija</option>
+            </label>
+            <label for="description">Opis
+            <textarea name="description" class="width-100"></textarea>
+            </label>
+            <label for="country">
+            Načini tretiranja
+            <select id="selection_type" name="selection_type" class="width-100">
+                <option value="0">Tretiranje iz zraka</option>
+                <option value="1">Tretiranje sa zemlje</option>
             </select>
+             </label>
             <script>
               $('.datepicker').pickadate();
               $('.timepicker').pickatime();
             </script>
-            <p>Date: <input type="text" class="datepicker" name="date"></p>
-            <p>Time: <input type="text" class="timepicker" name="time"></p>
-           <h3> Lokacija: </h3>
+            <label for="date">
+            Datum: 
+            <input type="text" class="datepicker width-100" name="date">
+            </label>
+            <label for="time">
+            Vrijeme: 
+            <input type="text" class="timepicker width-100" name="time">
+            </label>
+           <h3>Lokacija: </h3>
            <label>
                 Odaberi na mapi područje zaprašivanja
            </label>
             <div class="map-container width-100">
                 {{> googleMap name="activity_map" options=mapOptions}}
-                <button id="clear_map">Očisti</button>
+               
             </div>
-            <style type="text/css" media="screen">
-                .map-container {
-                    height: 250px;
-                    }
-            </style>
+
             <p><input id="my_lat" type="hidden" name="lat" value=""></p>
             <p><input id="my_lng" type="hidden" name="lng" value=""></p>
 
-           <!--  <p><input type="submit" value="Submit ticket"></p> -->
-            <button class="btn btn-red" type="submit" value="Submit ticket">Spremi senzor</button>
+            <button id="clear_map" class="btn btn-green">Očisti</button>
+            <button class="btn btn-red right" type="submit" value="Submit ticket">Spremi</button>
     </form>
+    </div>
+    </div>
 </template>
 
 <template name="activity">
-    <ul>
-        <li><a href="{{pathFor route='activity'}}" title=""></a>{{name}}</li>
+<div class="units-row">
+    <div class="unit-30">
+    <h2>{{name}}</h2>
+    <ul class="list-flat">
+        
         <li>{{description}}</li>
         <li>{{formatTime scheduledAt}}</li>
     </ul>
-    <ul>
-        <li>
-             <div class="map-container width-100">
-                {{> googleMap name="activity_map" options=mapOptions}}
-            </div>
-        </li>
-    </ul>
-    <button id="delete_activity"></button>
+    <button class="btn btn-red" id="delete_activity"><i class="fa fa-trash"></i>
+ Obriši aktivnost :-) </button>
+
+    </div>
+    <div class="unit-70">
+         <div class="map-container width-100">
+            {{> googleMap name="activity_map" options=mapOptions}}
+        </div>
+    </div>
+    </div>
 </template>
