@@ -44,7 +44,7 @@
 <form class="forms register">
     <label>
         Vaš komentar:
-          <textarea name="comment" class="width-100" placeholder="comment"></textarea>
+          <textarea name="comment" class="width-100"></textarea>
     </label>
 	<button class="btn btn-green width-100" value="Register" type="submit" name="action">Komentiraj
 		<i class="fa fa-paper-plane-o"></i>
@@ -90,10 +90,20 @@
     <th>Brzina vjetra</th>
     <td>{{wind}} km/h</td>
 </tr>
-<tr>
-    <td>{{avg}}</td>
-</tr>
 </table>
-<a class="btn btn-green btn-outline width-100" href="{{pathFor 'sensor' _id=nearest_sensor }}" title="">Pogledajte najbližu točku <i class="fa fa-line-chart"></i>
+
+    <div id="gauge" class="200x160px"></div>
+        <script>
+            var g = new JustGage({
+            id: "gauge",
+            value: {{avg}},
+            min: 0,
+            max: 100,
+            title: "Mogućnost rojenja komaraca"
+      });
+    </script>
+
+
+<a class="btn btn-green btn-outline width-100" href="{{pathFor 'sensor' _id=nearest_sensor }}" title="">Provjerite vrijednosti naše senzorske mreže <i class="fa fa-line-chart"></i>
 </a>
 </template>
