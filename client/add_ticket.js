@@ -19,8 +19,8 @@ Template.add_ticket.events({
     event.preventDefault();
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function(position) {
-          var existsNear = true;
-          var events = Events.find({}, {latitude: 1, longitude: 1}).fetch();
+          var existsNear = false;
+          var events = Events.find({status: 1}, {latitude: 1, longitude: 1}).fetch();
           for(var i = 0; i < events.length; i++) {
             var lat1 = events[i].latitude;
             var lon1 = events[i].longitude;
@@ -77,6 +77,7 @@ Template.add_ticket.events({
       phone: phone,
       description: description,
       priority: 1,
+      status: 1,
       votes: [userId],
       latitude: latitude,
       longitude: longitude,
@@ -99,8 +100,8 @@ Template.add_ticket.onCreated(function() {
       google.maps.event.addListener(map.instance, 'click', function(event) {
         // Markers.insert({ lat: event.latLng.lat(), lng: event.latLng.lng() });
         if (addedMarkers.length == 0) {
-          var existsNear = true;
-          var events = Events.find({}, {latitude: 1, longitude: 1}).fetch();
+          var existsNear = false;
+          var events = Events.find({status: 1}, {latitude: 1, longitude: 1}).fetch();
           for(var i = 0; i < events.length; i++) {
             var lat1 = events[i].latitude;
             var lon1 = events[i].longitude;

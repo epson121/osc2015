@@ -29,7 +29,7 @@
 
         </li>
     </ul>
-     {{#if currentUser}}
+     {{#if currentUser status}}
 
     <button id="priority_btn" value="Prioritize" type="submit" name="action" class="btn btn-blue width-100">Povećaj prioritet <i class="fa fa-arrow-up"></i> </button>
 <hr >
@@ -40,16 +40,21 @@
 		</ol>
 
 
- {{#if currentUser}}
-<form class="forms register">
-    <label>
-        Vaš komentar:
-          <textarea name="comment" class="width-100" placeholder="comment"></textarea>
-    </label>
-	<button class="btn btn-green width-100" value="Register" type="submit" name="action">Komentiraj
-		<i class="fa fa-paper-plane-o"></i>
-	</button>
-</form>
+ {{#if currentUser status}}
+        <form class="forms register">
+            <label>
+                Vaš komentar:
+                  <textarea name="comment" class="width-100" placeholder="comment"></textarea>
+            </label>
+        	<button class="btn btn-green width-100" value="Register" type="submit" name="action">Komentiraj
+        		<i class="fa fa-paper-plane-o"></i>
+        	</button>
+        </form>
+{{/if}}
+{{#if isAdmin}}
+<button id="archive" class="btn btn-red width-100" value="Arhiviraj" type="submit" name="action">Arhiviraj
+    <i class="fa fa-paper-plane-o"></i>
+</button>
 {{/if}}
 </div>
 		<div class="unit-50">
@@ -76,7 +81,7 @@
 
 <template name="sensorData">
 <hr />
-<h3>Izmjerene vrijednosti (10 zadnjih očitavanja)</h3>
+<h3>Izmjerene vrijednosti (zadnje očitanje)</h3>
 <table class="table-bordered">
 <tr>
     <th>Temperatura</th>
@@ -96,4 +101,21 @@
 </table>
 <a class="btn btn-green btn-outline width-100" href="{{pathFor 'sensor' _id=nearest_sensor }}" title="">Pogledajte najbližu točku <i class="fa fa-line-chart"></i>
 </a>
+</template>
+
+
+<template name="archive">
+
+    <nav class="nav nav-stacked">
+        <ul class="list-flat">
+        {{#each events}}
+            <li>
+            <b class="badge badge-red badge-small right">{{priority}}</b>
+              {{title}} I {{formatTime createdAt}}
+            </li>
+            <li>{{description}}</li>
+            <hr>
+        {{/each}}
+        </ul>
+    </nav>
 </template>

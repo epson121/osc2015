@@ -1,8 +1,27 @@
 Template.evts.helpers({
     events: function () {
-        var events = Events.find({}, {sort: {priority: -1}});
+        var events = Events.find({status: 1}, {sort: {priority: -1}});
         Session.set('events', events.fetch());
         return events;
+    }
+});
+
+Template.archive.helpers({
+    events: function () {
+        var events = Events.find({status: 0}, {sort: {priority: -1}});
+        Session.set('archive', events.fetch());
+        return events;
+    },
+
+    isAdmin: function() {
+        var user = Meteor.user();
+        if (!user)
+            return false;
+        if (!user.profile)
+            return false;
+        if (!user.profile.admin)
+            return false;
+        return true;
     }
 });
 
@@ -51,6 +70,20 @@ Template.event.events({
         } else {
             Events.update({_id: evt._id}, {$inc: {priority: 1}, $push: {votes: userId}});
         }
+    },
+
+    'click #archive': function(event) {
+        event.preventDefault();
+        if (confirm("Jeste li sigurni da želite arhivirati ovu aktivnost?")) {
+            Events.update({_id: this._id}, {$set: {status: 0}}, function(error, success) {
+                if (error) {
+                    toastr.error("Greska prilikom arhiviranja.");
+                } else {
+                    toastr.success('Aktivnost arhivirana.');
+                    Router.go('home');
+                }
+            })
+        }
     }
 });
 
@@ -82,6 +115,17 @@ Template.event.helpers({
         };
       }
     },
+
+    isAdmin: function() {
+        var user = Meteor.user();
+        if (!user)
+            return false;
+        if (!user.profile)
+            return false;
+        if (!user.profile.admin)
+            return false;
+        return true;
+    }
 });
 
 Template.event.onCreated(function() {

@@ -45,7 +45,7 @@ var mock = function () {
 
 var cron = new Meteor.Cron( {
   events:{
-    // "* * * * *"  : mock,
+     "*/15 * * * *"  : mock,
   }
 });
 

@@ -65,6 +65,12 @@ Router.route('/add_ticket', function() {
     name: 'add_ticket'
 });
 
+Router.route('/archive', function() {
+    this.render('archive');
+}, {
+    name: 'archive'
+});
+
 Router.route('/event/:_id', function() {
     this.render('event', {
       data: function() {
@@ -99,9 +105,7 @@ Router.route('/activity/:_id', function() {
 // BACKDOOR
 Router.route('/komarci', function() {
     this.render('komarci', {
-      data: function() {
-        return Activities.find({}).fetch();
-      }
+      layoutTemplate: 'komarac'
     });
 }, {
     name: 'komarci'
