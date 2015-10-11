@@ -1,5 +1,4 @@
 <template name="evts">
-<h2>Vaše prijave</h2>
     <ul class="list-flat">
     {{#each events}}
         <li class="tools-alert-blue tools-alert">
@@ -75,17 +74,22 @@
 </template>
 
 <template name="sensorData">
-<ul>
-    <li>Average data (last 10 readings)</li>
-    <li>
-        Temperature {{temperature}} C
-    </li>
-    <li>
-        Humidity {{humidity}} %
-    </li>
-    <li>
-        Wind {{wind}} km/h
-    </li>
-    <li><a href="{{pathFor 'sensor' _id=nearest_sensor }}" title="">Nearest sensor</a></li>
-</ul>
+<hr />
+<h3>Izmjerene vrijednosti (10 zadnjih očitavanja)</h3>
+<table class="table-bordered">
+<tr>
+    <th>Temperatura</th>
+    <td>{{temperature}} °C</td>
+</tr>
+<tr>
+    <th>Vlažnost</th>
+    <td>{{humidity}} %</td>
+</tr>
+<tr>
+    <th>Brzina vjetra</th>
+    <td>{{wind}} km/h</td>
+</tr>
+</table>
+<a class="btn btn-green btn-outline width-100" href="{{pathFor 'sensor' _id=nearest_sensor }}" title="">Pogledajte najbližu točku <i class="fa fa-line-chart"></i>
+</a>
 </template>

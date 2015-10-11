@@ -3674,3 +3674,6 @@ button.close{
 .map-container {
   height: 450px;
 }
+.toast-top-right{
+  top: 50px !important;
+}

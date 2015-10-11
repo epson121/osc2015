@@ -135,7 +135,7 @@ Template.sensor.temperatureChart = function() {
             plotShadow: false
         },
         title: {
-            text: this.name + " All-time Temperature chart"
+            text: this.name + " Prikaz temperature"
         },
         tooltip: {
             pointFormat: '{series.name} at <b>{point.y:,.0f}</b>'
