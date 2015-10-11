@@ -57,6 +57,12 @@ Template.event.events({
 Template.event_comments_list.helpers({
     eventComments: function() {
         return EventComments.find({evt: this._id});
+    },
+
+    username: function(id) {
+        var user = Meteor.users.findOne({_id: id});
+        console.log(user);
+        return user.profile.name;
     }
 });
 
@@ -69,7 +75,10 @@ Template.event.helpers({
       if (GoogleMaps.loaded()) {
         return {
           center: new google.maps.LatLng(45.5575, 18.6796),
-          zoom: 11
+          zoom: 11,
+          mapTypeControlOptions: {
+            mapTypeIds: [google.maps.MapTypeId.ROADMAP]
+          }
         };
       }
     },

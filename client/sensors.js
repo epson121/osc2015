@@ -9,7 +9,10 @@ Template.sensors.helpers({
       if (GoogleMaps.loaded()) {
         return {
           center: new google.maps.LatLng(45.5575, 18.6796),
-          zoom: 11
+          zoom: 11,
+          mapTypeControlOptions: {
+            mapTypeIds: [google.maps.MapTypeId.ROADMAP]
+          }
         };
       }
     },
@@ -48,9 +51,12 @@ Template.new_sensor.helpers({
   mapOptions: function() {
     if (GoogleMaps.loaded()) {
       return {
-        center: new google.maps.LatLng(45.5575, 18.6796),
-        zoom: 11
-      };
+          center: new google.maps.LatLng(45.5575, 18.6796),
+          zoom: 11,
+          mapTypeControlOptions: {
+            mapTypeIds: [google.maps.MapTypeId.ROADMAP]
+          }
+        };
     }
   }
 });

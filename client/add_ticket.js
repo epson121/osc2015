@@ -3,9 +3,12 @@ Template.add_ticket.helpers({
   mapOptions: function() {
     if (GoogleMaps.loaded()) {
       return {
-        center: new google.maps.LatLng(45.5575, 18.6796),
-        zoom: 11
-      };
+          center: new google.maps.LatLng(45.5575, 18.6796),
+          zoom: 11,
+          mapTypeControlOptions: {
+            mapTypeIds: [google.maps.MapTypeId.ROADMAP]
+          }
+        };
     }
   }
 });
