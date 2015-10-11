@@ -1,7 +1,71 @@
 <template name="activities">
 {{#each activities}}
+<ul>
+    <li><a href="{{pathFor route='activity'}}" title="">{{name}}</a></li>
+    <li>{{description}}</li>
+    <li>{{formatTime scheduledAt}}</li>
+</ul>
+{{else}}
+    Nema brate..
 {{/each}}
+<br><br>
 {{#if isAdmin}}
-    <a href="{{pathFor route='new_sensor'}}" title="new_sensor">Add new sensor</a>
+    <a href="{{pathFor route='new_activity'}}" title="new_activity">Add new activity</a>
 {{/if}}
+</template>
+
+
+<template name="new_activity">
+    <form method="post" action="" class="forms new_sensor">
+
+            <h1>Dodaj novu aktivnost zaprašivanja</h1>
+            <label for="name">Naziv</label>
+            <input type="text" name="name"  class="width-100"/>
+            <label for="description">Opis</label>
+            <textarea name="description"></textarea>
+            <select id="selection_type" name="selection_type">
+                <option value="0">Poligon</option>
+                <option value="1">Linija</option>
+            </select>
+            <script>
+              $('.datepicker').pickadate();
+              $('.timepicker').pickatime();
+            </script>
+            <p>Date: <input type="text" class="datepicker" name="date"></p>
+            <p>Time: <input type="text" class="timepicker" name="time"></p>
+           <h3> Lokacija: </h3>
+           <label>
+                Odaberi na mapi područje zaprašivanja
+           </label>
+            <div class="map-container width-100">
+                {{> googleMap name="activity_map" options=mapOptions}}
+                <button id="clear_map">Očisti</button>
+            </div>
+            <style type="text/css" media="screen">
+                .map-container {
+                    height: 250px;
+                    }
+            </style>
+            <p><input id="my_lat" type="hidden" name="lat" value=""></p>
+            <p><input id="my_lng" type="hidden" name="lng" value=""></p>
+
+           <!--  <p><input type="submit" value="Submit ticket"></p> -->
+            <button class="btn btn-red" type="submit" value="Submit ticket">Spremi senzor</button>
+    </form>
+</template>
+
+<template name="activity">
+    <ul>
+        <li><a href="{{pathFor route='activity'}}" title=""></a>{{name}}</li>
+        <li>{{description}}</li>
+        <li>{{formatTime scheduledAt}}</li>
+    </ul>
+    <ul>
+        <li>
+             <div class="map-container width-100">
+                {{> googleMap name="activity_map" options=mapOptions}}
+            </div>
+        </li>
+    </ul>
+    <button id="delete_activity"></button>
 </template>
