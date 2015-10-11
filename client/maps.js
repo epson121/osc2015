@@ -11,12 +11,10 @@ Template.map_evts.helpers({
 
 Template.map_evts.onCreated(function() {
   GoogleMaps.ready('map', function(map) {
-      console.log("here");
       if (Session.get('events')) {
         var events = Session.get('events');
         for (var i = 0; i < events.length; i++) {
           var myLatLng = new google.maps.LatLng(events[i].latitude, events[i].longitude);
-          console.log(myLatLng);
           var marker = new google.maps.Marker({
             draggable: false,
             position: myLatLng,

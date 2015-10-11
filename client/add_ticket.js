@@ -23,7 +23,7 @@ Template.add_ticket.events({
             var lat2 = position.coords.latitude
             var lon2 = position.coords.longitude
             if (distance(lat1, lon1, lat2, lon2, 'K') < 0.5) {
-              if (confirm("There is already an open ticket near this location. Visit this ticket?")) {
+              if (confirm("Već postoji prijava blizu ove lokacije. Želite li biti preusmjereni tamo?")) {
                 Router.go('event', {_id: events[i]._id})
               }
               var existsNear = true;
@@ -34,11 +34,11 @@ Template.add_ticket.events({
           if (!existsNear) {
             $('#my_lat').val(position.coords.latitude);
             $('#my_lng').val(position.coords.longitude);
-            toastr.success('Current location used');
+            toastr.success('Iskoristili smo vašu trenutnu lokaciju');
           }
         })
     } else {
-        toastr.error("Geolocation is not supported by this browser.");
+        toastr.error("Geolokacija nije dozvoljena u ovom pregledniku.");
     }
   },
 
@@ -59,7 +59,7 @@ Template.add_ticket.events({
      var longitude = $('[name=lng]').val();
 
      if (!name || !phone || !description || !latitude || !longitude) {
-      toastr.error('Please fill in all fields');
+      toastr.error('Molim ispunite sva polja.');
       return;
      }
 
@@ -78,7 +78,7 @@ Template.add_ticket.events({
         if (error) {
           toastr.error(error.reason);
         } else {
-          toastr.success('Event submitted successfully');
+          toastr.success('Uspješno dodana prijava');
           Router.go('home');
         }
      });
@@ -89,20 +89,18 @@ Template.add_ticket.events({
 
 Template.add_ticket.onCreated(function() {
   GoogleMaps.ready('map', function(map) {
-     console.log("I'm ready!");
       google.maps.event.addListener(map.instance, 'click', function(event) {
         // Markers.insert({ lat: event.latLng.lat(), lng: event.latLng.lng() });
         if (addedMarkers.length == 0) {
           var existsNear = true;
           var events = Events.find({}, {latitude: 1, longitude: 1}).fetch();
-          console.log(event);
           for(var i = 0; i < events.length; i++) {
             var lat1 = events[i].latitude;
             var lon1 = events[i].longitude;
             var lat2 = event.latLng.J;
             var lon2 = event.latLng.M;
             if (distance(lat1, lon1, lat2, lon2, 'K') < 0.5) {
-              if (confirm("There is already an open ticket near this location. Visit this ticket?")) {
+              if (confirm("Već postoji prijava blizu ove lokacije. Želite li biti preusmjereni tamo?")) {
                 Router.go('event', {_id: events[i]._id})
               } else {
                 var existsNear = true;

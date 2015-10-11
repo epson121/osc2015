@@ -218,8 +218,6 @@ Template.activity.events({
 Template.activity.onCreated(function() {
   clearMap()
   GoogleMaps.ready('activity_map', function(map) {
-    console.log("I'm ready!");
-    console.log(Session.get('coords'));
     drawNew(map.instance, Session.get('coords'));
   });
 });
@@ -229,8 +227,6 @@ function drawNew(map, coords) {
         // Construct the polygon.
       if (coords.length > 2) {
 
-        console.log("OKOK");
-        console.log(coords);
         if (planeMap) {
             planeMap.setMap(null);
         }
@@ -243,8 +239,6 @@ function drawNew(map, coords) {
             fillOpacity: 0.35
         });
         planeMap.setMap(map);
-      } else {
-        console.log("NOT");
       }
   } else {
      if (coords.length > 1) {
