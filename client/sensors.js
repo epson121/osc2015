@@ -9,7 +9,10 @@ Template.sensors.helpers({
       if (GoogleMaps.loaded()) {
         return {
           center: new google.maps.LatLng(45.5575, 18.6796),
-          zoom: 11
+          zoom: 11,
+          mapTypeControlOptions: {
+            mapTypeIds: [google.maps.MapTypeId.ROADMAP]
+          }
         };
       }
     },
@@ -28,20 +31,16 @@ Template.sensors.helpers({
 
 Template.sensors.onCreated(function() {
   GoogleMaps.ready('sensors_map', function(map) {
-    console.log("here123");
       if (Session.get('sensors')) {
         var sensors = Session.get('sensors');
         for (var i = 0; i < sensors.length; i++) {
           var myLatLng = new google.maps.LatLng(sensors[i].latitude, sensors[i].longitude);
-          console.log(myLatLng);
           var marker = new google.maps.Marker({
             draggable: false,
             position: myLatLng,
             map: map.instance,
           });
         }
-      } else {
-        console.log("no session sensors");
       }
     });
 });
@@ -52,9 +51,12 @@ Template.new_sensor.helpers({
   mapOptions: function() {
     if (GoogleMaps.loaded()) {
       return {
-        center: new google.maps.LatLng(45.5575, 18.6796),
-        zoom: 11
-      };
+          center: new google.maps.LatLng(45.5575, 18.6796),
+          zoom: 11,
+          mapTypeControlOptions: {
+            mapTypeIds: [google.maps.MapTypeId.ROADMAP]
+          }
+        };
     }
   }
 });
@@ -77,7 +79,7 @@ Template.new_sensor.events({
         var longitude = $('[name=lng]').val();
 
      if (!name || !description || !latitude || !longitude) {
-      FlashMessages.sendError('Please fill in all fields');
+      FlashMessages.sendError('Molim ispunite sva polja.');
       return;
      }
 
@@ -96,7 +98,7 @@ Template.new_sensor.events({
         if (error) {
             FlashMessages.sendError(error.reason);
         } else {
-            FlashMessages.sendSuccess('Sensor added');
+            FlashMessages.sendSuccess('Sensor uspješno dodan.');
             Router.go('sensors');
         }
      });
@@ -107,7 +109,6 @@ Template.new_sensor.events({
 
 Template.new_sensor.onCreated(function() {
   GoogleMaps.ready('map', function(map) {
-     console.log("I'm ready!");
       google.maps.event.addListener(map.instance, 'click', function(event) {
         if (sensorMarkers.length == 0) {
           var sensors = Sensors.find({}, {latitude: 1, longitude: 1}).fetch();
@@ -129,108 +130,141 @@ Template.new_sensor.onCreated(function() {
 
 Template.sensor.temperatureChart = function() {
     return {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false
-        },
         title: {
-            text: this.name + " Prikaz temperature"
+            text: 'Temperatura'
         },
-        tooltip: {
-            pointFormat: '{series.name} at <b>{point.y:,.0f}</b>'
+
+        xAxis: {
+            type: 'integer'
         },
-        plotOptions: {
-            area: {
-                pointStart: 0,
-                marker: {
-                    enabled: false,
-                    symbol: 'circle',
-                    radius: 2,
-                    states: {
-                        hover: {
-                            enabled: true
-                        }
-                    }
-                }
+
+        yAxis: {
+            title: {
+                text: null
             }
         },
+
+        tooltip: {
+            crosshairs: true,
+            shared: true,
+            valueSuffix: '°C'
+        },
+
+        legend: {
+        },
+
         series: [{
-            type: 'area',
-            name: 'temperature',
-            data: this.temperature
+            name: 'Temperatura',
+            data: this.temperature,
+            zIndex: 1,
+            marker: {
+                fillColor: 'white',
+                lineWidth: 2,
+                lineColor: Highcharts.getOptions().colors[0]
+            }
+        }, {
+            name: 'Range',
+            data: _.map(this.temperature, function(elem) {return [20, 38]}),
+            type: 'arearange',
+            lineWidth: 0,
+            linkedTo: ':previous',
+            color: "#F8D5D8",
+            fillOpacity: 0.3,
+            zIndex: 0
         }]
     };
 };
 
 Template.sensor.humidityChart = function() {
     return {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false
+         title: {
+            text: 'Vlažnost zraka'
         },
-        title: {
-            text: this.name + " All-time Humidity chart"
+
+        xAxis: {
+            type: 'integer'
         },
-        tooltip: {
-            pointFormat: '{series.name} at <b>{point.y:,.0f}</b>'
-        },
-        plotOptions: {
-            area: {
-                pointStart: 0,
-                marker: {
-                    enabled: false,
-                    symbol: 'circle',
-                    radius: 2,
-                    states: {
-                        hover: {
-                            enabled: true
-                        }
-                    }
-                }
+
+        yAxis: {
+            title: {
+                text: null
             }
         },
+
+        tooltip: {
+            crosshairs: true,
+            shared: true,
+            valueSuffix: '°C'
+        },
+
+        legend: {
+        },
+
         series: [{
-            type: 'area',
-            name: 'humidity',
-            data: this.humidity
+            name: 'Vlažnost zraka',
+            data: this.humidity,
+            zIndex: 1,
+            marker: {
+                fillColor: 'white',
+                lineWidth: 2,
+                lineColor: Highcharts.getOptions().colors[0]
+            }
+        }, {
+            name: 'Range',
+            data: _.map(this.temperature, function(elem) {return [75, 100]}),
+            type: 'arearange',
+            lineWidth: 0,
+            linkedTo: ':previous',
+            color: "#F8D5D8",
+            fillOpacity: 0.3,
+            zIndex: 0
         }]
     };
 };
 
 Template.sensor.windChart = function() {
     return {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false
-        },
         title: {
-            text: this.name + " All-time Humidity chart"
+            text: 'Brzina vjetra'
         },
-        tooltip: {
-            pointFormat: '{series.name} at <b>{point.y:,.0f}</b>'
+
+        xAxis: {
+            type: 'integer'
         },
-        plotOptions: {
-            area: {
-                pointStart: 0,
-                marker: {
-                    enabled: false,
-                    symbol: 'circle',
-                    radius: 2,
-                    states: {
-                        hover: {
-                            enabled: true
-                        }
-                    }
-                }
+
+        yAxis: {
+            title: {
+                text: null
             }
         },
+
+        tooltip: {
+            crosshairs: true,
+            shared: true,
+            valueSuffix: '°C'
+        },
+
+        legend: {
+        },
+
         series: [{
-            type: 'area',
-            name: 'wind',
-            data: this.wind
+            name: 'Brzina vjetra',
+            data: this.wind,
+            zIndex: 1,
+            marker: {
+                fillColor: 'white',
+                lineWidth: 2,
+                lineColor: Highcharts.getOptions().colors[0]
+            }
+        }, {
+            name: 'Range',
+            data: _.map(this.wind, function(elem) {return [5, 15]}),
+            type: 'arearange',
+            lineWidth: 0,
+            linkedTo: ':previous',
+            color: "#F8D5D8",
+            fillOpacity: 0.3,
+            zIndex: 0
         }]
     };
 };
@@ -255,7 +289,6 @@ Template.sensor.onCreated(function() {
       if (Session.get('selected_sensor')) {
         var evt = Session.get('selected_sensor');
         var myLatLng = new google.maps.LatLng(evt.latitude, evt.longitude);
-        console.log(myLatLng);
         var marker = new google.maps.Marker({
             draggable: false,
             position: myLatLng,

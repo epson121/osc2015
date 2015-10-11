@@ -1,6 +1,6 @@
 Template.evts.helpers({
     events: function () {
-        var events = Events.find({});
+        var events = Events.find({}, {sort: {priority: -1}});
         Session.set('events', events.fetch());
         return events;
     }
@@ -46,7 +46,6 @@ Template.event.events({
 
         var evt = Events.findOne({_id: eventId});
         var hasVoted = $.inArray(userId, evt.votes)
-        console.log(hasVoted);
         if (hasVoted != -1) {
             Events.update({_id: evt._id}, {$inc: {priority: -1}, $pull: {votes: userId}});
         } else {
@@ -58,6 +57,12 @@ Template.event.events({
 Template.event_comments_list.helpers({
     eventComments: function() {
         return EventComments.find({evt: this._id});
+    },
+
+    username: function(id) {
+        var user = Meteor.users.findOne({_id: id});
+        console.log(user);
+        return user.profile.name;
     }
 });
 
@@ -70,7 +75,10 @@ Template.event.helpers({
       if (GoogleMaps.loaded()) {
         return {
           center: new google.maps.LatLng(45.5575, 18.6796),
-          zoom: 11
+          zoom: 11,
+          mapTypeControlOptions: {
+            mapTypeIds: [google.maps.MapTypeId.ROADMAP]
+          }
         };
       }
     },
@@ -81,7 +89,6 @@ Template.event.onCreated(function() {
       if (Session.get('selected_event')) {
         var evt = Session.get('selected_event');
         var myLatLng = new google.maps.LatLng(evt.latitude, evt.longitude);
-        console.log(myLatLng);
         var marker = new google.maps.Marker({
             draggable: false,
             position: myLatLng,

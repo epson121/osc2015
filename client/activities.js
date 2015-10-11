@@ -22,7 +22,10 @@ Template.new_activity.helpers({
         if (GoogleMaps.loaded()) {
             return {
               center: new google.maps.LatLng(45.5575, 18.6796),
-              zoom: 11
+              zoom: 11,
+              mapTypeControlOptions: {
+                mapTypeIds: [google.maps.MapTypeId.ROADMAP]
+              }
             };
         }
     }
@@ -195,31 +198,34 @@ Template.activity.helpers({
     }
     if (GoogleMaps.loaded()) {
       return {
-        center: new google.maps.LatLng(45.5575, 18.6796),
-        zoom: 11
-      };
+          center: new google.maps.LatLng(45.5575, 18.6796),
+          zoom: 11,
+          mapTypeControlOptions: {
+            mapTypeIds: [google.maps.MapTypeId.ROADMAP]
+          }
+        };
     }
   }
 });
 
 Template.activity.events({
     'click #delete_activity': function (event) {
-        Activities.remove({_id: this._id}, function(error, success) {
-            if (error) {
-                toastr.error("Greska prilikom brisanja.");
-            } else {
-                toastr.success('Aktivnost obrisana.');
-                Router.go('activities');
-            }
-        })
+        if (confirm("Jeste li sigurni da želite izbrisati ovu aktivnost?")) {
+            Activities.remove({_id: this._id}, function(error, success) {
+                if (error) {
+                    toastr.error("Greska prilikom brisanja.");
+                } else {
+                    toastr.success('Aktivnost obrisana.');
+                    Router.go('activities');
+                }
+            })
+        }
     }
 });
 
 Template.activity.onCreated(function() {
   clearMap()
   GoogleMaps.ready('activity_map', function(map) {
-    console.log("I'm ready!");
-    console.log(Session.get('coords'));
     drawNew(map.instance, Session.get('coords'));
   });
 });
@@ -229,8 +235,6 @@ function drawNew(map, coords) {
         // Construct the polygon.
       if (coords.length > 2) {
 
-        console.log("OKOK");
-        console.log(coords);
         if (planeMap) {
             planeMap.setMap(null);
         }
@@ -243,8 +247,6 @@ function drawNew(map, coords) {
             fillOpacity: 0.35
         });
         planeMap.setMap(map);
-      } else {
-        console.log("NOT");
       }
   } else {
      if (coords.length > 1) {

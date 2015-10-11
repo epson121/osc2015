@@ -3,17 +3,25 @@ Template.register.events({
       event.preventDefault();
       var em = $('[name=email]').val();
       var pass = $('[name=password]').val();
+      var name = $('[name=name]').val();
+
+      if (!em || !pass || !name) {
+        toastr.error('Molim ispunite sva polja.');
+        return;
+      }
+
       var options = {
           email: em,
           password: pass,
           profile: {
+            name: name
           },
       };
       Accounts.createUser(options, function(error) {
         if (error) {
-          toastr.error("There was an error in registering.");
+          toastr.error("Greška prilikom registracije");
         } else {
-          toastr.success("You've successfully registered.");
+          toastr.success("Uspješno ste registrirani.");
           Router.go('home');
         };
       });
@@ -27,15 +35,13 @@ Template.login.events({
       var password = $('[name=password]').val();
       Meteor.loginWithPassword(email, password, function(error) {
         if (error) {
-          console.log(error.reason);
           toastr.error(error.reason);
         } else {
-          toastr.success("You've successfully logged in.");
-          console.log(Meteor.user().profile.admin);
+          toastr.success("Uspješno ste se prijavili.");
           var profile = Meteor.user().profile;
           if (profile) {
             if (profile.admin) {
-              Router.go('admin');
+              Router.go('activities');
             } else {
               Router.go('home');
             }
@@ -51,7 +57,7 @@ Template.header.events({
     'click .logout': function(event) {
       event.preventDefault();
       Meteor.logout();
-      toastr.success("You've successfully logged out.");
+      toastr.success("Uspješno ste se odjavili.");
       Router.go('home');
     }
   });

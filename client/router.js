@@ -3,27 +3,7 @@ Router.configure({
 })
 
 Router.route('/', {
-  // this template will be rendered until the subscriptions are ready
-  // loadingTemplate: 'loading',
   name: 'home',
-
-  // waitOn: function () {
-  //   // return one handle, a function, or an array
-  //   return Meteor.subscribe('books');
-  // },
-  // data: function() {
-  //   data = {events: Events.find({})};
-  //   Session.set('events', data);
-  //   return data;
-  // },
-
-  // waitOn: function() {
-  //   return Meteor.subscribe('books');
-  // },
-
-  // action: function () {
-  //   this.render('home');
-  // }
 });
 
 Router.route('/register', function() {
