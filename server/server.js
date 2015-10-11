@@ -8,6 +8,7 @@ Meteor.startup(function() {
           email : 'admin@admin.com',
           password : 'admin',
           profile  : {
+              name: "Admin",
               admin: true
           }
 

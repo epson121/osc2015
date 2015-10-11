@@ -86,9 +86,10 @@
         <li>{{description}}</li>
         <li>{{formatTime scheduledAt}}</li>
     </ul>
+    {{#if isAdmin}}
     <button class="btn btn-red" id="delete_activity"><i class="fa fa-trash"></i>
  Obriši aktivnost :-) </button>
-
+    {{/if}}
     </div>
     <div class="unit-70">
          <div class="map-container width-100">
