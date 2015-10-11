@@ -7,16 +7,13 @@
     <div class="navigation-toggle" data-tools="navigation-toggle" data-target="#navbar-1">
     <span>Izbornik</span>
 </div>
-        <nav id="navbar-1" class="navbar  navbar-left">
+        <nav id="navbar-1" class="navbar">
             <ul>
             	<li><a href="{{pathFor route='home'}}"><i class="fa fa-home"></i> Naslovnica</a></li>
                 <li><a href="{{pathFor route='sensors'}}"><i class="fa fa-tachometer"></i> Senzori</a></li>
                 <li><a href="{{pathFor route='activities'}}"><i class="fa fa-area-chart"></i> Aktivnosti</a></li>
                 <li><a href="{{pathFor route='add_ticket'}}"><i class="fa fa-bug"></i> Prijavi Rojeve</a></li>
-            </ul>
-        </nav>
-        <nav class="navbar navbar-right">
-            <ul>
+        
                 {{#if currentUser}}
 				  <li><a href="#" class="logout"><i class="fa fa-sign-out"></i>
 					Odjava</a></li>

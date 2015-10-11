@@ -1,14 +1,17 @@
 <template name="evts">
-    <ul class="list-flat">
-    {{#each events}}
-        <li class="tools-alert-blue tools-alert">
-       <span class="badge badge-red">{{priority}}</span>
-           <a href="{{pathFor route='event'}}"> {{name}}</a>
-            {{description}}
-            {{formatTime createdAt}}
-        </li>
-    {{/each}}
-    </ul>
+
+    <nav class="nav nav-stacked">
+        <ul class="list-flat">
+        {{#each events}}
+            <li>
+            <a href="{{pathFor route='event'}}">
+            <b class="badge badge-red badge-small right">{{priority}}</b>
+              {{name}} I {{formatTime createdAt}}
+              </a>
+            </li>
+        {{/each}}
+        </ul>
+    </nav>
 </template>
 
 
@@ -31,9 +34,11 @@
         </li>
     </ul>
      {{#if currentUser}}
+
     <button id="priority_btn" value="Prioritize" type="submit" name="action" class="btn btn-blue width-100">Povećaj prioritet <i class="fa fa-arrow-up"></i> </button>
 <hr >
 {{/if}}
+<h3>Vaši komentari:</h3>
 		<ol class="list-flat">
 		  {{> event_comments_list}}
 		</ol>

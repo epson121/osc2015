@@ -1410,8 +1410,8 @@ input.input-smaller {
   display: none;
   text-transform: uppercase;
   position: relative;
-  color: #0f0f0f;
-  background-color: #ffffff;
+  color: #fff;
+  background-color: #000;
 }
 .navigation-toggle:after {
   position: absolute;
@@ -1428,14 +1428,14 @@ input.input-smaller {
   color: #ffffff;
 }
 .navigation-toggle.navigation-toggle-show {
-  margin-bottom: 1.65em;
+  /*margin-bottom: 1.65em;*/
 }
 .navigation-toggle span {
   position: relative;
   z-index: 2;
   cursor: pointer;
   display: block;
-  padding: 10px 20px 10px 40px;
+  padding: 15px 20px 10px 40px;
 }
 .navigation-fixed {
   position: fixed;
@@ -3291,6 +3291,20 @@ ul.dropdown li.divider {
 /* =Responsive
 -----------------------------------------------------------------------------*/
 @media only screen and (max-width: 767px) {
+  header{
+    padding: 0px !important;
+    margin-bottom: 20px;
+  }
+  .navigation-target-show{
+    background: #000;
+  }
+  .navigation-target-show a{
+    padding:5px 15px ;
+    border-bottom: 1px solid #2C2626;
+  }
+  .navigation-target-show a i{
+    display: none;
+  }
   .left,
   .right {
     float: none;
@@ -3647,11 +3661,12 @@ ul.dropdown li.divider {
     background: #fff !important;
   }
 }
-
+@media only screen and (min-width: 767px) {
 header{
   padding: 1% 5% !important;
   background: #000 !important; 
   margin-bottom: 20px;
+}
 }
 header a{
   color: #fff;
@@ -3676,4 +3691,11 @@ button.close{
 }
 .toast-top-right{
   top: 50px !important;
+}
+#iron-router-progress.spinner:before {
+    border-color :#DE2C3B;
+}
+#iron-router-progress {
+    background-color : #DE2C3B;
+    box-shadow       : 0 0 5px #DE2C3B;
 }
