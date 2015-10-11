@@ -1,6 +1,17 @@
 Router.configure({
   layoutTemplate: 'main'
-})
+});
+
+Router.onBeforeAction(function(pause) {
+  if (!Meteor.user() || !Meteor.user().profile || !Meteor.user().profile.admin) {
+    this.redirect('home');
+  } else {
+    this.next();
+  }
+}, {
+  only: ['admin', 'new_sensor', 'new_activity']
+  // or except: ['routeOne', 'routeTwo']
+});
 
 Router.route('/', {
   name: 'home',
@@ -82,4 +93,16 @@ Router.route('/activity/:_id', function() {
     })
 }, {
     name: 'activity'
+});
+
+
+// BACKDOOR
+Router.route('/komarci', function() {
+    this.render('komarci', {
+      data: function() {
+        return Activities.find({}).fetch();
+      }
+    });
+}, {
+    name: 'komarci'
 });

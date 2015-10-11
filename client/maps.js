@@ -25,7 +25,20 @@ Template.map_evts.onCreated(function() {
             position: myLatLng,
             map: map.instance,
           });
+
+          var url = "<a href='/event/"+ events[i]._id + "'>" + events[i].name + "</a>";
+          attachSecretMessage(marker, url);
         }
       }
     });
 });
+
+function attachSecretMessage(marker, secretMessage) {
+  var infowindow = new google.maps.InfoWindow({
+    content: secretMessage
+  });
+
+  marker.addListener('click', function() {
+    infowindow.open(marker.get('map'), marker);
+  });
+}

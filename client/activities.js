@@ -1,7 +1,7 @@
 var activityMarkers = activityMarkers || [];
 Template.activities.helpers({
     activities: function () {
-        var activities = Activities.find({}, {$sort: {scheduledAt: -1}});
+        var activities = Activities.find({}, {sort: {scheduledAt: -1}});
         return activities;
     },
 
