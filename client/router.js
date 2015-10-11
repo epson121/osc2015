@@ -50,16 +50,22 @@ Router.route('/sensors', function() {
     name: 'sensors'
 });
 
+Router.route('/new_sensor', function() {
+    this.render('new_sensor');
+}, {
+    name: 'new_sensor'
+});
+
 Router.route('/activities', function() {
     this.render('activities');
 }, {
     name: 'activities'
 });
 
-Router.route('/new_sensor', function() {
-    this.render('new_sensor');
+Router.route('/new_activity', function() {
+    this.render('new_activity');
 }, {
-    name: 'new_sensor'
+    name: 'new_activity'
 });
 
 Router.route('/add_ticket', function() {
@@ -86,4 +92,14 @@ Router.route('/sensor/:_id', function() {
     })
 }, {
     name: 'sensor'
+});
+
+Router.route('/activity/:_id', function() {
+    this.render('activity', {
+      data: function() {
+        return Activities.findOne({_id: this.params._id});
+      }
+    })
+}, {
+    name: 'activity'
 });
